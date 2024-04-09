@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -15,16 +15,16 @@ import {
   AppState,
 } from 'react-native';
 import WeatherData from './WeatherData';
-import {useDispatch, useSelector} from 'react-redux';
-import {weatherApi} from '../Redux/WeatherApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { weatherApi } from '../Redux/WeatherApi';
 import Geolocation from '@react-native-community/geolocation';
-import {locationcords} from '../Redux/WeatherReducer';
+import { locationcords } from '../Redux/WeatherReducer';
 import CustText from '../Component/CustText';
 import {
   isLocationEnabled,
   promptForEnableLocationIfNeeded,
 } from 'react-native-android-location-enabler';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Weather() {
   const [isrefreshing, setRefreshing] = useState(false);
@@ -128,12 +128,12 @@ export default function Weather() {
       Geolocation.getCurrentPosition(
         position => {
           console.log(position);
-          const {latitude, longitude} = position.coords;
-          const cord = {latitude: latitude, longitude: longitude};
+          const { latitude, longitude } = position.coords;
+          const cord = { latitude: latitude, longitude: longitude };
 
           dispatch(weatherApi(cord));
 
-          dispatch(locationcords({latitude: latitude, longitude: longitude}));
+          dispatch(locationcords({ latitude: latitude, longitude: longitude }));
 
           console.log('Dispatched : ' + latitude, longitude);
         },
@@ -230,7 +230,7 @@ export default function Weather() {
             />
           }
           data={items?.daily}
-          renderItem={({item, index}) => {
+          renderItem={({ item, index }) => {
             return <WeatherData item={item} index={index} />;
           }}
         />
